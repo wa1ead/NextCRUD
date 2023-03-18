@@ -29,7 +29,7 @@ export default function Table() {
         </thead>
         <tbody className="bg-gray-200">
           {data.map((obj, i) => (
-            <tableRaw {...obj} key={i} />
+            <TableRaw {...obj} key={i} />
           ))}
         </tbody>
       </table>
@@ -37,7 +37,7 @@ export default function Table() {
   );
 }
 
-function tableRaw({ id, name, avatar, email, salary, date, status }) {
+function TableRaw({ id, name, avatar, email, salary, date, status }: any) {
   return (
     <>
       <tr className="bg-gray-50 text-center text-black">

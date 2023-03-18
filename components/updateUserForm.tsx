@@ -3,7 +3,7 @@ import Success from "../components/success";
 import Bug from "../components/bug";
 import { BiBrush } from "react-icons/bi";
 
-const formReducer = (state, event) => {
+const formReducer = (state: any, event: any) => {
   return {
     ...state,
     [event.target.name]: event.target.value,
@@ -12,7 +12,7 @@ const formReducer = (state, event) => {
 
 export default function UpdateUserForm() {
   const [formData, setFormData] = useReducer(formReducer, {});
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     if (Object.keys(formData).length == 0)
       return console.log("Don't Have Form Data");
