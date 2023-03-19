@@ -1,8 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import connectMongo from "../../../database/connection";
 import {
-  getEmployees,
-  postEmployees,
+  getEmployee,
   putEmployee,
   deleteEmployee,
 } from "../../../database/controller";
@@ -20,10 +19,7 @@ export default async function handler(
 
   switch (method) {
     case "GET":
-      getEmployees(req, res);
-      break;
-    case "POST":
-      postEmployees(req, res);
+      getEmployee(req, res);
       break;
     case "PUT":
       putEmployee(req, res);

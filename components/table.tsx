@@ -1,7 +1,16 @@
-import data from "../database/data.json";
+import { getEmployees } from "../library/helper";
 import { BiEdit, BiTrashAlt } from "react-icons/bi";
+import { NextApiResponse } from "next";
+import { useQuery } from "react-query";
 
 export default function Table() {
+  const { isLoading, isError, data, error } = useQuery(
+    "employees",
+    getEmployees
+  );
+
+  if (isLoading) return <div>Employee is Loading...</div>;
+  if (isError) return <div>Got Error {error}</div>;
   return (
     <>
       <table className="min-w-full table-auto">
@@ -28,9 +37,8 @@ export default function Table() {
           </tr>
         </thead>
         <tbody className="bg-gray-200">
-          {data.map((obj, i) => (
-            <TableRaw {...obj} key={i} />
-          ))}
+          {Array.isArray(data) &&
+            data.map((obj: any, i: any) => <TableRaw {...obj} key={i} />)}
         </tbody>
       </table>
     </>
@@ -42,7 +50,11 @@ function TableRaw({ id, name, avatar, email, salary, date, status }: any) {
     <>
       <tr className="bg-gray-50 text-center text-black">
         <td className="px-16 py-2 flex flex-row items-center">
-          <img src={avatar || "#"} alt="" />
+          <img
+            src={avatar || "#"}
+            alt=""
+            className="h-8 w-8 rounded-full object-cover"
+          />
           <span className="text-center ml-2 font-semibold">
             {name || "Unknown"}
           </span>
@@ -58,7 +70,11 @@ function TableRaw({ id, name, avatar, email, salary, date, status }: any) {
         </td>
         <td>
           <button className="cursor">
-            <span className="bg-green-500 text-white px-5 py-1 rou">
+            <span
+              className={`${
+                status == "Active" ? "bg-green-500" : "bg-rose-500"
+              }text-white px-5  py-1 rounded-full`}
+            >
               {status || "Unknown"}
             </span>
           </button>
