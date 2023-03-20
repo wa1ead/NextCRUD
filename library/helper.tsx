@@ -44,7 +44,7 @@ export async function updateEmployee(empId: any, formData: any) {
 }
 
 // DELETE EMPLOYEE
-export async function deleteEmployee(empId: any, formData: any) {
+export async function deleteEmployee(empId: any) {
   const options = {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
